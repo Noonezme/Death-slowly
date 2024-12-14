@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminal Style Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: white;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .terminal {
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .line {
+      white-space: pre-wrap;
+    }
+
+    .blinking-cursor {
+      display: inline-block;
+      width: 10px;
+      background-color: white;
+      animation: blink 1s steps(2, start) infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% {
+        background-color: transparent;
+      }
+      50% {
+        background-color: white;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal" id="terminal">
+    <div class="line">I’ve been through a lot of pain in my life—more than I ever thought I could handle. It feels like no matter how hard I tried, everything just kept falling apart. I had dreams, big ones, but life never gave me the chance to reach them. After everything, I’ve reached a point where I’m done. I’ve given up on all of it. I just don’t have the strength to keep chasing something that feels so far out of reach. It’s not easy to admit, but this is where I am now. I worked alone from the youngest age anyone could ever imagine. There was no one to help me, no one to guide me, and no one to share my pain. No one was there to be my friend, and today, it’s still the same. 
+        God will be your judge... He knows who I am talking about.
+    </div>
+    <div class="line">                                                           
+        ##### ##                                     /       
+     /#####  /##                                   #/        
+   //    /  / ###                            #     ##        
+  /     /  /   ###                          ##     ##        
+       /  /     ###                         ##     ##        
+      ## ##      ##    /##       /###     ######## ##  /##   
+      ## ##      ##   / ###     / ###  / ########  ## / ###  
+      ## ##      ##  /   ###   /   ###/     ##     ##/   ### 
+      ## ##      ## ##    ### ##    ##      ##     ##     ## 
+      ## ##      ## ########  ##    ##      ##     ##     ## 
+      #  ##      ## #######   ##    ##      ##     ##     ## 
+         /       /  ##        ##    ##      ##     ##     ## 
+    /###/       /   ####    / ##    /#      ##     ##     ## 
+   /   ########/     ######/   ####/ ##     ##     ##     ## 
+  /       ####        #####     ###   ##     ##     ##    ## 
+  #                                                       /  
+   ##                                                    /   
+                                                        /    
+                                                       /     
+                        will apear...</div>
+    <div class="line"> </div>
+    <div class="line" id="input-line"><span id="user-input"></span><span class="blinking-cursor"></span></div>
+  </div>
+
+  <script>
+    const userInput = document.getElementById('user-input');
+    const terminal = document.getElementById('terminal');
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        const newLine = document.createElement('div');
+        newLine.classList.add('line');
+        newLine.textContent = userInput.textContent;
+        terminal.insertBefore(newLine, document.getElementById('input-line'));
+        userInput.textContent = '';
+      } else if (event.key === 'Backspace') {
+        userInput.textContent = userInput.textContent.slice(0, -1);
+      } else if (event.key.length === 1) {
+        userInput.textContent += event.key;
+      }
+    });
+  </script>
+</body>
+</html>
